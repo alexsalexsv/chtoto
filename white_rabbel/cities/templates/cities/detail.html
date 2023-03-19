@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Город
+{% endblock %}
+
+{% block content %}
+    <h1>Список городов</h1>
+    <div class="row">
+        <div class="col-md">
+
+            <p> {{ object.name }} </p>
+            <p> {{ object.content }}</p>
+            <img src="{{ object.img.url }}" id="img">
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                    <a href="{% url 'cities:home' %}">
+                        <button type="button" class="btn btn-light">Назад</button>
+                    </a
+                ></div>
+        </div>
+    </div>
+
+    <style>
+        #img {
+            max-width: 400px;
+            max-height: 200px;
+        }
+    </style>
+
+{% endblock %}

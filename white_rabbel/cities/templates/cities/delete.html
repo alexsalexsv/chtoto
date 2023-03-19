@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Список городов
+{% endblock %}
+
+{% block content %}
+    <h1>Удаление города</h1>
+    <p> Удалить {{ object }} из списка? </p>
+    {% include 'form.html' with btn_text='Удалить' %}
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Список городов
+{% endblock %}
+
+{% block content %}
+    <h1>Список городов</h1>
+    <div class="row">
+        <div class="col-md-8 mx-auto my-3 ">
+            <table class="table table-striped">
+                {% for object in page_obj %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'cities:detail' object.pk %}"> {{ object.name }} </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'cities:update' object.pk %}">
+                                <button type="button" class="btn btn-sm btn-outline-warning">Редактировать</button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'cities:delete' object.pk %}">
+                                <button type="button" class="btn btn-sm btn-outline-danger">Удалить</button>
+                            </a>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+
+        <li class="page-item">
+            {% if page_obj.has_previous %}
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+            {% endif %}
+        </li>
+        {% for page in page_obj.paginator.page_range %}
+            <li class="page-item {% if page == page_obj.number %}active{% endif %}">
+                <a class="page-link" href="?page={{ page }}">
+                    {{ page }}
+                </a>
+            </li>
+        {% endfor %}
+        <li class="page-item">
+            {% if page_obj.has_next %}
+
+              <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                <span class="sr-only">Next</span>
+              </a>
+            {% endif %}
+        </li>
+      </ul>
+    </nav>
+
+    <style>
+        table {
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+            background: rgba(100, 227, 220, 0.3);
+	        padding: 3px;
+	        margin-bottom: 5px;
+        }
+        a {
+            text-decoration: none;
+            color: #308ab6;
+        }
+        a:hover{
+            color: #031a26;
+            font-weight: 400;
+        }
+        .page-item {
+            box-shadow: 0 7px 14px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
+        }
+    </style>
+{% endblock %}
